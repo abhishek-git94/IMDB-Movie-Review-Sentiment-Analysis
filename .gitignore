@@ -10,3 +10,6 @@ venv/
 # OS / editor
 .DS_Store
 .ipynb_checkpoints/
+
+# Local Claude Code / IDE config
+.claude/
