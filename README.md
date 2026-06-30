@@ -50,14 +50,14 @@ The original model used `SimpleRNN(activation='relu')`, which suffered from **ex
 |------|-------------|
 | [`main.py`](main.py) | The Streamlit web app (classification + word-importance visualization). |
 | [`train.py`](train.py) | Clean, stable training script (BiLSTM + gradient clipping). Run this to retrain. |
-| [`sentiment_model.keras`](sentiment_model.keras) | The trained model used by the app (~87% test accuracy). |
+| [`sentiment_model.h5`](sentiment_model.h5) | The trained model used by the app (~87% test accuracy). |
 | [`simple_rnn_imdb.h5`](simple_rnn_imdb.h5) | Legacy SimpleRNN model (kept as a fallback / reference). |
 | [`simplernn.ipynb`](simplernn.ipynb) | Original training notebook (shows the exploding-gradient problem). |
 | [`prediction.ipynb`](prediction.ipynb) | Notebook for loading the model and testing predictions. |
 | [`embedding.ipynb`](embedding.ipynb) | Standalone notebook explaining word embeddings. |
 | [`requirements.txt`](requirements.txt) | Python dependencies for the app. |
 
-> The app auto-loads `sentiment_model.keras` if present, and falls back to `simple_rnn_imdb.h5` otherwise.
+> The app auto-loads `sentiment_model.h5` if present, and falls back to `simple_rnn_imdb.h5` otherwise.
 
 ---
 
@@ -100,7 +100,7 @@ To retrain from scratch (downloads the IMDB dataset automatically):
 ```bash
 python train.py
 ```
-This produces a fresh `sentiment_model.keras`. Training uses:
+This produces a fresh `sentiment_model.h5`. Training uses:
 - **Bidirectional LSTM** (64 units) with default tanh activation
 - **Adam** optimizer with `clipnorm=1.0` (gradient clipping)
 - **Dropout (0.5)** for regularization

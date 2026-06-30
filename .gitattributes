@@ -1,0 +1,3 @@
+# Treat model files as binary so Git never applies line-ending conversion.
+*.h5 binary
+*.keras binary

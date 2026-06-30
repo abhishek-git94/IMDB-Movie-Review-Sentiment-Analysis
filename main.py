@@ -9,8 +9,10 @@ from tensorflow.keras.models import load_model
 MAX_FEATURES = 10000  # vocabulary size the model was trained on
 MAX_LEN = 500         # sequence length the model expects
 
-# Prefer the retrained LSTM model; fall back to the original SimpleRNN model.
-MODEL_CANDIDATES = ['sentiment_model.keras', 'simple_rnn_imdb.h5']
+# Prefer the retrained BiLSTM model; fall back to the original SimpleRNN model.
+# Use HDF5 (.h5): it loads more reliably across environments than the .keras
+# format does for Bidirectional models.
+MODEL_CANDIDATES = ['sentiment_model.h5', 'simple_rnn_imdb.h5']
 
 
 # Step 2: Cached loaders (run once, reused across reruns)

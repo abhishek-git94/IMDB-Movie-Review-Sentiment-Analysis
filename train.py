@@ -6,10 +6,11 @@ Fixes the issues in the original simplernn.ipynb:
     with an LSTM (default tanh activation), which handles long sequences and
     keeps gradients stable.
   - Adds gradient clipping (clipnorm) to the optimizer as a second safeguard.
-  - Saves in the modern native Keras format (.keras) instead of legacy .h5.
+  - Saves in HDF5 (.h5) format, which loads reliably across environments
+    (the .keras format can fail to load Bidirectional models elsewhere).
 
 Run:  python train.py
-Output:  sentiment_model.keras
+Output:  sentiment_model.h5
 """
 
 import numpy as np
@@ -26,7 +27,7 @@ MAX_LEN = 500          # sequence length
 EMBED_DIM = 128
 EPOCHS = 10
 BATCH_SIZE = 64
-OUTPUT_PATH = 'sentiment_model.keras'
+OUTPUT_PATH = 'sentiment_model.h5'
 
 
 def main():
@@ -64,7 +65,7 @@ def main():
     loss, acc = model.evaluate(X_test, y_test, verbose=0)
     print(f'\nTest loss: {loss:.4f}  |  Test accuracy: {acc:.4f}')
 
-    # 5. Save in the modern Keras format
+    # 5. Save in HDF5 format (robust to load across environments)
     model.save(OUTPUT_PATH)
     print(f'Saved model to {OUTPUT_PATH}')
 
